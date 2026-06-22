@@ -401,45 +401,60 @@
     .empty-notice p { font-size: 16px; color: var(--text2); margin-top: 14px; }
     .empty-notice a { color: var(--accent); }
 
-    /* ── CONTACT ──────────────────────────────────── */
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 64px; margin-top: 52px; align-items: start;
+    /* ── CONTACT / FINAL CTA ──────────────────────── */
+    .cta-section {
+      text-align: center; padding: 120px 24px 100px;
+      position: relative; overflow: hidden;
     }
-    @media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
-    .contact-info h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 14px; }
-    .contact-info > p { color: var(--text2); font-size: 15px; line-height: 1.7; margin-bottom: 28px; }
-    .contact-detail { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--text2); font-size: 14px; }
-    .contact-detail svg { color: var(--accent); flex-shrink: 0; }
-    .contact-detail a { color: var(--accent); }
-    .founding-box {
-      margin-top: 32px;
-      background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(124,58,237,0.04));
-      border: 1px solid rgba(168,85,247,0.2); border-radius: 16px; padding: 22px;
+    .cta-section::before {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(168,85,247,0.14) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .founding-label { font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-    .founding-box p { font-size: 14px; color: var(--text2); line-height: 1.6; margin: 0; }
-
-    .contact-form { background: var(--bg2); border: 1px solid var(--border); border-radius: 24px; padding: 32px; }
-    .form-group { margin-bottom: 18px; }
-    label { display: block; font-size: 11px; font-weight: 600; margin-bottom: 7px; color: var(--text3); letter-spacing: 0.8px; text-transform: uppercase; }
-    input, select, textarea {
-      width: 100%; background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 10px; color: var(--text); font-family: inherit;
-      font-size: 15px; padding: 11px 14px;
-      transition: border-color 0.2s; outline: none; -webkit-appearance: none;
+    .cta-spot {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,215,10,0.08); border: 1px solid rgba(255,215,10,0.2);
+      color: var(--gold); border-radius: 100px;
+      padding: 5px 16px; font-size: 11px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 32px;
     }
-    input:focus, select:focus, textarea:focus { border-color: rgba(168,85,247,0.5); }
-    input::placeholder, textarea::placeholder { color: var(--text3); }
-    select option { background: var(--bg3); }
-    .form-submit {
-      width: 100%; background: var(--accent); color: #fff;
-      border: none; border-radius: 12px; padding: 14px;
-      font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit;
-      transition: background 0.2s, box-shadow 0.2s, transform 0.2s; margin-top: 4px;
+    .cta-section h2 {
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 800; letter-spacing: -2.5px; line-height: 1.06;
+      margin-bottom: 20px; position: relative; z-index: 1;
     }
-    .form-submit:hover { background: #9333ea; box-shadow: 0 8px 28px rgba(168,85,247,0.35); transform: translateY(-1px); }
-    .form-note { text-align: center; color: var(--text3); font-size: 12px; margin-top: 10px; }
+    .cta-sub {
+      font-size: 18px; color: var(--text2); margin-bottom: 48px;
+      position: relative; z-index: 1;
+    }
+    .cta-wa {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #25d366; color: #fff;
+      padding: 18px 40px; border-radius: 100px;
+      font-size: 18px; font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 4px 32px rgba(37,211,102,0.25);
+      position: relative; z-index: 1;
+      will-change: transform;
+    }
+    .cta-wa:hover { background: #20b558; box-shadow: 0 8px 40px rgba(37,211,102,0.45); }
+    .cta-or {
+      display: block; color: var(--text3); font-size: 13px;
+      margin: 24px 0 8px; position: relative; z-index: 1;
+    }
+    .cta-email {
+      color: var(--text2); font-size: 15px; transition: color 0.2s;
+      position: relative; z-index: 1;
+    }
+    .cta-email:hover { color: var(--text); }
+    .cta-lock {
+      margin-top: 52px; color: var(--text3); font-size: 13px;
+      position: relative; z-index: 1;
+    }
+    .cta-lock strong { color: var(--text2); }
 
     /* ── FOOTER ───────────────────────────────────── */
     footer {
@@ -724,76 +739,19 @@
   </div>
 </div>
 
-<!-- CONTACT -->
+<!-- CONTACT / FINAL CTA -->
 <div class="sec-dark" id="contact">
-  <div class="sec">
-    <div class="sec-label gs-reveal">Get Started</div>
-    <h2 class="gs-reveal">Ready to Automate<br>Your Business?</h2>
-    <div class="contact-grid">
-      <div class="contact-info gs-reveal">
-        <h3>We handle everything.</h3>
-        <p>Our team visits your business, sets up CIPHER in under 30 minutes, and leaves with your bot live and answering customers. You don't touch a single setting.</p>
-        <div class="contact-detail">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1 19.79 19.79 0 0 1 1.61 4.53 2 2 0 0 1 3.59 2.37h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 17z"/></svg>
-          WhatsApp: <a href="https://wa.me/923001234567">+92 300 XXXXXXX</a>
-        </div>
-        <div class="contact-detail">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <a href="mailto:hello@cipher.ai">hello@cipher.ai</a>
-        </div>
-        <div class="founding-box">
-          <div class="founding-label">Founding Member Offer</div>
-          <p>First 20 clients get their price <strong style="color:var(--text);">locked in forever</strong> at today's rate — even when we raise prices for new clients.</p>
-        </div>
-      </div>
-      <div class="contact-form gs-reveal">
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="contact">
-          <p style="display:none;"><input name="bot-field"></p>
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="John Smith" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">WhatsApp Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="+92 300 0000000" required>
-          </div>
-          <div class="form-group">
-            <label for="business">Business Name</label>
-            <input type="text" id="business" name="business" placeholder="Your Business Name">
-          </div>
-          <div class="form-group">
-            <label for="type">Business Type</label>
-            <select id="type" name="type">
-              <option value="">Select type...</option>
-              <option>School / Academy</option>
-              <option>Gym / Fitness Center</option>
-              <option>Restaurant / Café</option>
-              <option>Salon / Spa</option>
-              <option>Medical Clinic</option>
-              <option>Pharmacy</option>
-              <option>Clothing / Boutique</option>
-              <option>Real Estate</option>
-              <option>Bakery / Sweet Shop</option>
-              <option>Coaching / Tutoring</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="plan">Interested In</label>
-            <select id="plan" name="plan">
-              <option value="">Select a plan...</option>
-              <option>Starter — Rs 5,000/month</option>
-              <option>Growth — Rs 8,000/month</option>
-              <option>Pro — Rs 12,000/month</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-          <button type="submit" class="form-submit">Send Message →</button>
-          <p class="form-note">We reply within 2 hours</p>
-        </form>
-      </div>
-    </div>
+  <div class="cta-section gs-reveal">
+    <div class="cta-spot">⚡ 20 founding spots · price locked forever</div>
+    <h2>See it live on your<br>WhatsApp. Today.</h2>
+    <p class="cta-sub">One visit. 30 minutes. Your bot is answering customers.</p>
+    <a href="https://wa.me/923001234567" class="cta-wa" target="_blank" rel="noopener">
+      <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L0 24l6.335-1.525A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.76.904.937-3.648-.234-.375A9.818 9.818 0 1112 21.818z"/></svg>
+      Message us on WhatsApp
+    </a>
+    <span class="cta-or">or</span>
+    <a href="mailto:hello@cipher.ai" class="cta-email">hello@cipher.ai</a>
+    <p class="cta-lock">We reply within 2 hours · <strong>First 20 clients get their price locked in forever.</strong></p>
   </div>
 </div>
 
@@ -890,7 +848,7 @@
   })
 
   // ── Magnetic buttons ──────────────────────────────────────────────
-  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(btn => {
+  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta, .cta-wa').forEach(btn => {
     btn.addEventListener('mousemove', e => {
       const r = btn.getBoundingClientRect()
       gsap.to(btn, {
