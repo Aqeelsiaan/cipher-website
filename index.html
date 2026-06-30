@@ -259,6 +259,52 @@
     /* ── SHARED SECTION WRAPPER ───────────────────── */
     .sec { max-width: 1000px; margin: 0 auto; padding: 110px 24px; }
     .sec-dark { background: var(--bg2); }
+
+    /* ── AMBIENT BACKGROUND (carries the hero's grid+glow into later sections,
+         so the page doesn't go flat black — kept faint on purpose) ────── */
+    .sec-ambient { position: relative; overflow: hidden; }
+    .sec-ambient::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black 0%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .sec-ambient-glow {
+      position: absolute; top: -8%; left: 50%; transform: translateX(-50%);
+      width: 720px; height: 380px;
+      background: radial-gradient(ellipse, rgba(168,85,247,0.09) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── FEATURES (13 modules) ────────────────────── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px; margin-top: 52px; position: relative; z-index: 1;
+    }
+    .feat-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px;
+      transition: background 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      position: relative; overflow: hidden;
+    }
+    .feat-card::after {
+      content: '';
+      position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(168,85,247,0.16), transparent 55%);
+      opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    }
+    .feat-card:hover::after { opacity: 1; }
+    .feat-card:hover { background: rgba(168,85,247,0.05); border-color: rgba(168,85,247,0.28); transform: translateY(-3px); }
+    .feat-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+    .feat-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .feat-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
     .sec-label {
       font-size: 11px; font-weight: 600; letter-spacing: 3px;
       text-transform: uppercase; color: var(--accent); margin-bottom: 18px;
@@ -608,6 +654,31 @@
   </div>
 </div>
 
+<!-- FEATURES (13 modules) -->
+<div class="sec-dark sec-ambient" id="features">
+  <div class="sec-ambient-glow"></div>
+  <div class="sec">
+    <div class="sec-label gs-reveal">Everything It Does</div>
+    <h2 class="gs-reveal">Not Just<br>Auto-Reply</h2>
+    <p class="sec-sub gs-reveal">13 built-in modules that actually run your operations in WhatsApp — not just answer FAQs.</p>
+    <div class="feat-grid" id="feat-grid">
+      <div class="feat-card"><span class="feat-icon">📅</span><div class="feat-title">Appointment Booking</div><div class="feat-desc">Customer picks a service, date, and time. You get notified instantly — no back-and-forth.</div></div>
+      <div class="feat-card"><span class="feat-icon">🛒</span><div class="feat-title">Order Taking</div><div class="feat-desc">Customer browses your catalog in-chat, builds a cart, confirms. You get the order with total.</div></div>
+      <div class="feat-card"><span class="feat-icon">💳</span><div class="feat-title">Fees &amp; Invoices</div><div class="feat-desc">Customer asks "fee kitni hai?" — bot generates a real PDF receipt. No manual invoicing.</div></div>
+      <div class="feat-card"><span class="feat-icon">🔄</span><div class="feat-title">Renewals</div><div class="feat-desc">Membership about to expire? Customer renews right in chat, you just confirm.</div></div>
+      <div class="feat-card"><span class="feat-icon">📋</span><div class="feat-title">Menu &amp; Catalog</div><div class="feat-desc">Full price list on demand, formatted and ready. Zero typing for you, every time.</div></div>
+      <div class="feat-card"><span class="feat-icon">🎁</span><div class="feat-title">Loyalty Points</div><div class="feat-desc">Tracks every customer's points automatically. No spreadsheet, no manual tally.</div></div>
+      <div class="feat-card"><span class="feat-icon">🚚</span><div class="feat-title">Delivery &amp; Tracking</div><div class="feat-desc">Customer drops their address, bot logs it and lets them check status anytime.</div></div>
+      <div class="feat-card"><span class="feat-icon">🎉</span><div class="feat-title">Events &amp; RSVP</div><div class="feat-desc">Announce a sale or event — customers RSVP right in WhatsApp, you see who's coming.</div></div>
+      <div class="feat-card"><span class="feat-icon">📄</span><div class="feat-title">Document Requests</div><div class="feat-desc">Reports, prescriptions, contracts — customer requests, you get a clean alert to send it.</div></div>
+      <div class="feat-card"><span class="feat-icon">🏠</span><div class="feat-title">Listings Showcase</div><div class="feat-desc">Customers browse listings and tell you exactly which one they want. Qualified leads only.</div></div>
+      <div class="feat-card"><span class="feat-icon">📝</span><div class="feat-title">Custom Quotations</div><div class="feat-desc">Bulk order or custom job? Bot collects the full requirement before it reaches you.</div></div>
+      <div class="feat-card"><span class="feat-icon">🗓️</span><div class="feat-title">Class &amp; Batch Schedules</div><div class="feat-desc">"Class timing kya hai?" — instant, accurate answer. Every single time.</div></div>
+      <div class="feat-card"><span class="feat-icon">✅</span><div class="feat-title">Attendance Check-in</div><div class="feat-desc">Members or students text "present" — logged with a timestamp automatically.</div></div>
+    </div>
+  </div>
+</div>
+
 <!-- HOW IT WORKS -->
 <div class="sec-dark" id="how">
   <div class="sec">
@@ -837,6 +908,13 @@
     scrollTrigger: { trigger: '#types-grid', start: 'top 82%', once: true }
   })
 
+  // ── Feature cards (13 modules) -- staggered grid ──────────────────
+  gsap.from('#feat-grid .feat-card', {
+    y: 28, opacity: 0, duration: 0.5, ease: 'power2.out',
+    stagger: { amount: 0.7, from: 'start' },
+    scrollTrigger: { trigger: '#feat-grid', start: 'top 82%', once: true }
+  })
+
   // ── Steps -- slide in + line draw ─────────────────────────────────
   gsap.from('.gs-step', {
     x: -24, opacity: 0, duration: 0.65, ease: 'power3.out',
@@ -853,8 +931,8 @@
     scrollTrigger: { trigger: '.pricing-grid', start: 'top 82%', once: true }
   })
 
-  // ── Spotlight hover on type cards ────────────────────────────────
-  document.querySelectorAll('.type-card').forEach(card => {
+  // ── Spotlight hover on type + feature cards ────────────────────────
+  document.querySelectorAll('.type-card, .feat-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect()
       card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%')
