@@ -1,2 +1,27 @@
 [build]
   publish = "."
+
+# Proxy backend paths straight to the CIPHER FastAPI server — everything else
+# on this domain stays the static marketing site. Netlify does not forward
+# X-Forwarded-Host to the origin (confirmed empirically), so the backend
+# uses a fixed PUBLIC_BASE_URL env var to know its own public domain for
+# building correct redirect URLs — update that env var if this domain changes.
+[[redirects]]
+  from = "/admin/*"
+  to = "http://136.119.32.195:8001/admin/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/partner/*"
+  to = "http://136.119.32.195:8001/partner/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/app/*"
+  to = "http://136.119.32.195:8001/app/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "http://136.119.32.195:8001/api/:splat"
+  status = 200
