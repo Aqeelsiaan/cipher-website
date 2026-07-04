@@ -16,6 +16,19 @@
   to = "http://136.119.32.195:8001/partner/:splat"
   status = 200
 
+# Bare /portal (no filename) sends people straight to the login page instead
+# of 404ing. Must come before the /portal/* wildcard below — Netlify matches
+# redirects top-to-bottom, first match wins.
+[[redirects]]
+  from = "/portal"
+  to = "/portal/login.html"
+  status = 301
+
+[[redirects]]
+  from = "/portal/"
+  to = "/portal/login.html"
+  status = 301
+
 [[redirects]]
   from = "/portal/*"
   to = "https://cipher-client-portal.netlify.app/:splat"
