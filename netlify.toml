@@ -17,8 +17,8 @@
   status = 200
 
 [[redirects]]
-  from = "/app/*"
-  to = "http://136.119.32.195:8001/app/:splat"
+  from = "/portal/*"
+  to = "https://cipher-client-portal.netlify.app/:splat"
   status = 200
 
 [[redirects]]
