@@ -34,6 +34,38 @@
   to = "https://cipher-client-portal.netlify.app/:splat"
   status = 200
 
+# Convenience redirects for bare client-portal paths people type/click without
+# the /portal prefix or .html extension (e.g. a bookmarked /forgot-password).
+[[redirects]]
+  from = "/login"
+  to = "/portal/login.html"
+  status = 301
+
+[[redirects]]
+  from = "/forgot-password"
+  to = "/portal/forgot-password.html"
+  status = 301
+
+[[redirects]]
+  from = "/set-password"
+  to = "/portal/set-password.html"
+  status = 301
+
+[[redirects]]
+  from = "/leads"
+  to = "/portal/leads.html"
+  status = 301
+
+[[redirects]]
+  from = "/settings"
+  to = "/portal/settings.html"
+  status = 301
+
+[[redirects]]
+  from = "/notifications"
+  to = "/portal/notifications.html"
+  status = 301
+
 [[redirects]]
   from = "/api/*"
   to = "http://136.119.32.195:8001/api/:splat"
