@@ -42,6 +42,11 @@
   status = 301
 
 [[redirects]]
+  from = "/client"
+  to = "/portal/login.html"
+  status = 301
+
+[[redirects]]
   from = "/forgot-password"
   to = "/portal/forgot-password.html"
   status = 301
