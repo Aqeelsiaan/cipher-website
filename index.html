@@ -10,7 +10,7 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -98,17 +98,32 @@
       pointer-events: none;
     }
 
-    .hero-glow {
-      position: absolute; top: 30%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px; height: 500px;
-      background: radial-gradient(ellipse, rgba(168,85,247,0.18) 0%, transparent 65%);
-      pointer-events: none;
-      animation: glow-breathe 5s ease-in-out infinite;
+    /* Aurora Glow — 3 blurred blobs drifting on independent loops, pure CSS */
+    .hero-glow { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+    .aurora-blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; }
+    .aurora-1 {
+      width: 620px; height: 620px; background: radial-gradient(circle, #a855f7, transparent 70%);
+      top: -10%; left: 10%; animation: drift1 18s ease-in-out infinite;
     }
-    @keyframes glow-breathe {
-      0%, 100% { opacity: 0.7; transform: translate(-50%,-50%) scale(1); }
-      50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.12); }
+    .aurora-2 {
+      width: 500px; height: 500px; background: radial-gradient(circle, #7c3aed, transparent 70%);
+      top: 20%; right: 5%; animation: drift2 22s ease-in-out infinite;
+    }
+    .aurora-3 {
+      width: 460px; height: 460px; background: radial-gradient(circle, #c4b5fd, transparent 70%);
+      bottom: -15%; left: 35%; animation: drift3 26s ease-in-out infinite;
+    }
+    @keyframes drift1 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%     { transform: translate(80px,60px) scale(1.15); }
+    }
+    @keyframes drift2 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%     { transform: translate(-70px,40px) scale(0.9); }
+    }
+    @keyframes drift3 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%     { transform: translate(50px,-50px) scale(1.1); }
     }
 
     .hero-badge {
@@ -131,9 +146,10 @@
     }
 
     #hero h1 {
+      font-family: 'Fraunces', serif;
       font-size: clamp(50px, 8.5vw, 96px);
-      font-weight: 800; line-height: 1.04;
-      letter-spacing: -3.5px; margin-bottom: 24px;
+      font-weight: 600; line-height: 1.04;
+      letter-spacing: -2.5px; margin-bottom: 24px;
       position: relative; z-index: 1;
     }
     #hero h1 .line { display: block; overflow: hidden; }
@@ -302,7 +318,8 @@
     }
     .feat-card:hover::after { opacity: 1; }
     .feat-card:hover { background: rgba(168,85,247,0.05); border-color: rgba(168,85,247,0.28); transform: translateY(-3px); }
-    .feat-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+    .feat-icon { width: 28px; height: 28px; margin-bottom: 14px; display: block; }
+    .inline-emoji { height: 1em; width: 1em; vertical-align: -0.15em; display: inline-block; }
     .feat-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
     .feat-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
     .sec-label {
@@ -310,8 +327,9 @@
       text-transform: uppercase; color: var(--accent); margin-bottom: 18px;
     }
     h2 {
+      font-family: 'Fraunces', serif;
       font-size: clamp(34px, 5.5vw, 58px);
-      font-weight: 800; letter-spacing: -2px; line-height: 1.08;
+      font-weight: 600; letter-spacing: -1.5px; line-height: 1.08;
     }
     .sec-sub {
       font-size: 17px; color: var(--text2);
@@ -556,7 +574,11 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-glow"></div>
+  <div class="hero-glow">
+    <div class="aurora-blob aurora-1"></div>
+    <div class="aurora-blob aurora-2"></div>
+    <div class="aurora-blob aurora-3"></div>
+  </div>
 
   <div class="hero-badge" id="hero-badge">
     <div class="badge-dot"></div>
@@ -590,10 +612,10 @@
       </div>
     </div>
     <div class="chat-msgs">
-      <div class="msg msg-in">Do you deliver? What are your hours? 🙏</div>
-      <div class="msg msg-out">Yes! We deliver within 5km 🚚 Open daily 8am–10pm. What would you like?</div>
+      <div class="msg msg-in">Do you deliver? What are your hours? <img class="inline-emoji" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f64f.png" alt=""></div>
+      <div class="msg msg-out">Yes! We deliver within 5km <img class="inline-emoji" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f69a.png" alt=""> Open daily 8am–10pm. What would you like?</div>
       <div class="msg msg-in">I need a birthday cake for Sunday</div>
-      <div class="msg msg-out">Our cakes start at Rs 2,500 🎂 I'll book your order right now. What's your address?</div>
+      <div class="msg msg-out">Our cakes start at Rs 2,500 <img class="inline-emoji" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f382.png" alt=""> I'll book your order right now. What's your address?</div>
     </div>
     <div class="chat-typing">
       <div class="td"></div><div class="td"></div><div class="td"></div>
@@ -660,21 +682,21 @@
   <div class="sec">
     <div class="sec-label gs-reveal">Everything It Does</div>
     <h2 class="gs-reveal">Not Just<br>Auto-Reply</h2>
-    <p class="sec-sub gs-reveal">13 built-in modules that actually run your operations in WhatsApp — not just answer FAQs.</p>
+    <p class="sec-sub gs-reveal">13 built-in modules that actually run your operations in WhatsApp, not just answer FAQs.</p>
     <div class="feat-grid" id="feat-grid">
-      <div class="feat-card"><span class="feat-icon">📅</span><div class="feat-title">Appointment Booking</div><div class="feat-desc">Customer picks a service, date, and time. You get notified instantly — no back-and-forth.</div></div>
-      <div class="feat-card"><span class="feat-icon">🛒</span><div class="feat-title">Order Taking</div><div class="feat-desc">Customer browses your catalog in-chat, builds a cart, confirms. You get the order with total.</div></div>
-      <div class="feat-card"><span class="feat-icon">💳</span><div class="feat-title">Fees &amp; Invoices</div><div class="feat-desc">Customer asks "fee kitni hai?" — bot generates a real PDF receipt. No manual invoicing.</div></div>
-      <div class="feat-card"><span class="feat-icon">🔄</span><div class="feat-title">Renewals</div><div class="feat-desc">Membership about to expire? Customer renews right in chat, you just confirm.</div></div>
-      <div class="feat-card"><span class="feat-icon">📋</span><div class="feat-title">Menu &amp; Catalog</div><div class="feat-desc">Full price list on demand, formatted and ready. Zero typing for you, every time.</div></div>
-      <div class="feat-card"><span class="feat-icon">🎁</span><div class="feat-title">Loyalty Points</div><div class="feat-desc">Tracks every customer's points automatically. No spreadsheet, no manual tally.</div></div>
-      <div class="feat-card"><span class="feat-icon">🚚</span><div class="feat-title">Delivery &amp; Tracking</div><div class="feat-desc">Customer drops their address, bot logs it and lets them check status anytime.</div></div>
-      <div class="feat-card"><span class="feat-icon">🎉</span><div class="feat-title">Events &amp; RSVP</div><div class="feat-desc">Announce a sale or event — customers RSVP right in WhatsApp, you see who's coming.</div></div>
-      <div class="feat-card"><span class="feat-icon">📄</span><div class="feat-title">Document Requests</div><div class="feat-desc">Reports, prescriptions, contracts — customer requests, you get a clean alert to send it.</div></div>
-      <div class="feat-card"><span class="feat-icon">🏠</span><div class="feat-title">Listings Showcase</div><div class="feat-desc">Customers browse listings and tell you exactly which one they want. Qualified leads only.</div></div>
-      <div class="feat-card"><span class="feat-icon">📝</span><div class="feat-title">Custom Quotations</div><div class="feat-desc">Bulk order or custom job? Bot collects the full requirement before it reaches you.</div></div>
-      <div class="feat-card"><span class="feat-icon">🗓️</span><div class="feat-title">Class &amp; Batch Schedules</div><div class="feat-desc">"Class timing kya hai?" — instant, accurate answer. Every single time.</div></div>
-      <div class="feat-card"><span class="feat-icon">✅</span><div class="feat-title">Attendance Check-in</div><div class="feat-desc">Members or students text "present" — logged with a timestamp automatically.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f4c5.png" alt=""><div class="feat-title">Appointment Booking</div><div class="feat-desc">Customer picks a service, date, and time. You get notified instantly, no back-and-forth.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f6d2.png" alt=""><div class="feat-title">Order Taking</div><div class="feat-desc">Customer browses your catalog in-chat, builds a cart, confirms. You get the order with total.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f4b3.png" alt=""><div class="feat-title">Fees &amp; Invoices</div><div class="feat-desc">Customer asks "fee kitni hai?" and the bot generates a real PDF receipt. No manual invoicing.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f504.png" alt=""><div class="feat-title">Renewals</div><div class="feat-desc">Membership about to expire? Customer renews right in chat, you just confirm.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f4cb.png" alt=""><div class="feat-title">Menu &amp; Catalog</div><div class="feat-desc">Full price list on demand, formatted and ready. Zero typing for you, every time.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f381.png" alt=""><div class="feat-title">Loyalty Points</div><div class="feat-desc">Tracks every customer's points automatically. No spreadsheet, no manual tally.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f69a.png" alt=""><div class="feat-title">Delivery &amp; Tracking</div><div class="feat-desc">Customer drops their address, bot logs it and lets them check status anytime.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f389.png" alt=""><div class="feat-title">Events &amp; RSVP</div><div class="feat-desc">Announce a sale or event and customers RSVP right in WhatsApp, you see who's coming.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f4c4.png" alt=""><div class="feat-title">Document Requests</div><div class="feat-desc">Reports, prescriptions, contracts. Customer requests, you get a clean alert to send it.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f3e0.png" alt=""><div class="feat-title">Listings Showcase</div><div class="feat-desc">Customers browse listings and tell you exactly which one they want. Qualified leads only.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f4dd.png" alt=""><div class="feat-title">Custom Quotations</div><div class="feat-desc">Bulk order or custom job? Bot collects the full requirement before it reaches you.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f5d3-fe0f.png" alt=""><div class="feat-title">Class &amp; Batch Schedules</div><div class="feat-desc">"Class timing kya hai?" gets an instant, accurate answer. Every single time.</div></div>
+      <div class="feat-card"><img class="feat-icon" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/2705.png" alt=""><div class="feat-title">Attendance Check-in</div><div class="feat-desc">Members or students text "present" and it's logged with a timestamp automatically.</div></div>
     </div>
   </div>
 </div>
@@ -828,7 +850,7 @@
 <!-- CONTACT / FINAL CTA -->
 <div class="sec-dark" id="contact">
   <div class="cta-section gs-reveal">
-    <div class="cta-spot">⚡ 20 founding spots · price locked forever</div>
+    <div class="cta-spot"><img class="inline-emoji" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/26a1.png" alt=""> 20 founding spots · price locked forever</div>
     <h2>See it live on your<br>WhatsApp. Today.</h2>
     <p class="cta-sub">One visit. 30 minutes. Your bot is answering customers.</p>
     <a href="https://wa.me/639467019866" class="cta-wa" target="_blank" rel="noopener">
