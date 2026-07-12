@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.cipherco.client",
+    "sha256_cert_fingerprints": [
+      "05:8C:4A:56:12:40:C1:CE:02:40:03:0D:75:AF:76:E6:0E:1F:1D:90:A7:9E:D3:DF:40:BE:63:9D:3A:0C:4F:6B"
+    ]
+  }
+}]
