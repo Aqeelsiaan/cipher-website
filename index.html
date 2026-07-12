@@ -456,6 +456,27 @@
     .plan-card.popular .plan-btn { background: var(--accent); color: #fff; border-color: var(--accent); }
     .plan-card.popular .plan-btn:hover { background: #9333ea; border-color: #9333ea; }
 
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq-list { max-width: 720px; margin: 44px auto 0; position: relative; z-index: 1; }
+    .faq-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px; margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-item summary {
+      list-style: none; cursor: pointer; padding: 18px 22px;
+      font-size: 15px; font-weight: 600; color: var(--text);
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-size: 20px; font-weight: 400; color: var(--text3);
+      flex-shrink: 0; transition: transform 0.2s;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-answer { padding: 0 22px 18px; font-size: 14px; color: var(--text2); line-height: 1.65; }
+
     /* ── SOCIAL PROOF ─────────────────────────────── */
     .empty-notice {
       text-align: center; padding: 72px 24px;
@@ -568,6 +589,7 @@
   <div class="nav-center">
     <a href="#how">How it works</a>
     <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
     <a href="/client">Client Login</a>
   </div>
@@ -849,6 +871,40 @@
   </div>
 </div>
 
+<!-- FAQ -->
+<div id="faq">
+  <div class="sec">
+    <div class="sec-label gs-reveal">Questions</div>
+    <h2 class="gs-reveal">Before You Ask</h2>
+    <div class="faq-list gs-reveal">
+      <details class="faq-item">
+        <summary>Kya mera WhatsApp number ban ho sakta hai?</summary>
+        <div class="faq-answer">CIPHER replies to customers who message you first, it doesn't cold-message strangers from your main number. Every message has human-like typing delays and pacing built in specifically to avoid the patterns WhatsApp flags. The optional "find new customers" outreach feature runs on a completely separate number with a strict daily limit, so even in the rare case that number ever gets restricted, your main customer-facing bot is untouched.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Agar main cancel karoon to mera data ka kya hota hai?</summary>
+        <div class="faq-answer">Cancel anytime, no lock-in. Your leads and settings stay exportable from your dashboard as a CSV before you go, so you keep your customer list either way.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Agar CIPHER band ho jaye to mera bot bhi band ho jayega?</summary>
+        <div class="faq-answer">No. Your bot runs on your own Google Cloud account, not ours, that's a deliberate choice. Even if CIPHER stopped existing tomorrow, the server you own keeps running.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Mera customer data kaun dekh sakta hai?</summary>
+        <div class="faq-answer">Only you and your assigned CIPHER admin. It's not shared, sold, or used to train anything outside your own bot. Each business gets its own isolated setup, not a shared pool with other clients.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Bot ne customer ko galat jawab de diya to?</summary>
+        <div class="faq-answer">The bot only quotes prices and policies you've actually entered, it's instructed to never guess or invent one. If a customer asks something it doesn't know, it says so and offers to hand off to a real person, either automatically or the moment you type "human" into the chat to take over yourself.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Kuch kharab ho jaye to support kaise milega?</summary>
+        <div class="faq-answer">Message us directly on WhatsApp, the same way your customers message you. We monitor bot uptime and reach out proactively if something goes down, you don't have to notice it first.</div>
+      </details>
+    </div>
+  </div>
+</div>
+
 <!-- CONTACT / FINAL CTA -->
 <div class="sec-dark" id="contact">
   <div class="cta-section gs-reveal">
@@ -872,6 +928,7 @@
   <div class="footer-links">
     <a href="#how">How it works</a>
     <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
     <a href="/client">Client Login</a>
   </div>
