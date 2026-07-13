@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — CIPHER</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #000; --bg2: #0a0a0a; --bg3: #111;
+      --border: rgba(255,255,255,0.08);
+      --text: #f5f5f7; --text2: #a1a1a6; --text3: #6b6b70;
+      --accent: #a855f7; --gold: #ffd60a;
+    }
+    body {
+      font-family: -apple-system, 'Inter', BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 100px; }
+    .back { display:inline-block; color: var(--text2); text-decoration:none; font-size:14px; margin-bottom:28px; }
+    .back:hover { color: var(--text); }
+    h1 { font-size: 32px; font-weight: 800; margin-bottom: 6px; }
+    .updated { color: var(--text3); font-size: 13px; margin-bottom: 36px; }
+    h2 { font-size: 19px; font-weight: 700; margin: 34px 0 10px; color: var(--text); }
+    p, li { color: var(--text2); font-size: 15px; }
+    ul, ol { padding-left: 22px; margin: 10px 0; }
+    li { margin-bottom: 6px; }
+    strong { color: var(--text); }
+    .notice {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 12px;
+      padding: 16px 18px; margin: 18px 0; font-size: 14px; color: var(--text2);
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">&larr; Back to CIPHER</a>
+    <h1>Privacy Policy</h1>
+    <div class="updated">Last updated: July 13, 2026</div>
+
+    <p>This covers both the business owner ("Client") who signs up for CIPHER, and that Client's own customers ("end customers") whose WhatsApp messages the bot replies to.</p>
+
+    <h2>1. What we collect</h2>
+    <p><strong>From the Client:</strong> business name, contact details, business type, hours, services, pricing, FAQ content, dashboard login (password stored hashed, never in plain text), and billing information necessary to invoice.</p>
+    <p><strong>From end customers, via the bot:</strong> WhatsApp phone number and display name, message content and the bot's replies (kept as short-term conversation memory so the bot can hold a coherent conversation), and — only where the business's bot has that feature enabled — order/booking details or payment screenshots the customer chooses to send.</p>
+    <p>We do not collect an end customer's location, contacts list, or anything beyond their conversation with that one business's bot.</p>
+
+    <h2>2. How we use it</h2>
+    <p>To operate the bot (generate replies, remember recent context, route orders/bookings to the business owner), to give the Client visibility into their own customers via their dashboard, and to send the Client service-related communications. We do not sell data, and we do not use conversation content to train a shared AI model.</p>
+
+    <h2>3. Where it's stored</h2>
+    <p>Configuration and customer records are stored in a managed database hosted outside Pakistan. As of 2026, Pakistan has not yet enacted a comprehensive data-protection law requiring local storage — if that changes, this policy will be updated and Clients notified.</p>
+
+    <h2>4. Third parties involved</h2>
+    <ul>
+      <li><strong>AI reply generation</strong> — Google Gemini and/or Groq process message text to generate replies, under their own standard provider terms.</li>
+      <li><strong>Database</strong> — Supabase, for storage and retrieval.</li>
+      <li><strong>Email</strong> — Resend, for portal invites, password resets, and license emails.</li>
+    </ul>
+
+    <h2>5. Retention & deletion</h2>
+    <p>Conversation memory used for context expires automatically after a short period of inactivity. If a Client cancels, their data remains available for export for 30 days, then is permanently deleted. An end customer who wants their conversation data removed can request this through the business they messaged.</p>
+
+    <h2>6. Security</h2>
+    <p>Passwords are stored hashed. Dashboard access requires login. Portal invites and password resets use time-limited, single-use links. The bot itself never holds direct database credentials.</p>
+
+    <h2>7. Questions or data requests</h2>
+    <p>Contact us via <a href="index.html#contact">the contact section</a> on our site.</p>
+  </div>
+</body>
+</html>
