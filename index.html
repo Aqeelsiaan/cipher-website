@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#E8EDF5">
 <title>CIPHER · The AI operating system for your business</title>
 <meta name="description" content="CIPHER answers your customers on WhatsApp day and night, runs bookings, orders and invoices, and finds new customers. Free setup visit; pay only if you go ahead.">
 <meta property="og:title" content="CIPHER · Your business, still answering at 2:14 am">
@@ -20,18 +21,18 @@
     color-scheme:light;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{background:var(--ground);scroll-behavior:smooth;scrollbar-color:#b7c2d6 var(--ground)}
+  html{background:var(--ground);scroll-behavior:smooth;scroll-padding:24px 0 110px;touch-action:manipulation;-webkit-tap-highlight-color:rgba(47,107,255,.12);scrollbar-color:#b7c2d6 var(--ground)}
   body{font:1.0625rem/1.6 var(--sans);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
   ::selection{background:var(--brand);color:#fff}
   a{color:inherit;text-underline-offset:.22em}
   :focus-visible{outline:2px solid var(--brand);outline-offset:4px;border-radius:14px}
-  #gl{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
+  #gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
   main,footer{position:relative;z-index:1}
   .wrap{width:min(1180px,100% - 2*clamp(20px,5vw,64px));margin-inline:auto}
   svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
   /* the dock is the navigation */
-  .dock{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:5;backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);background:rgba(240,244,250,.62);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55);display:flex;align-items:center;gap:4px;padding:8px;border-radius:30px}
+  .dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:5;backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);background:rgba(240,244,250,.62);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55);display:flex;align-items:center;gap:4px;padding:8px;border-radius:30px}
   .dock a{display:grid;justify-items:center;gap:3px;min-width:70px;padding:8px 10px 7px;border-radius:22px;text-decoration:none;font-size:.74rem;font-weight:600;color:var(--text);transition:transform .16s var(--ease-out)}
   .dock a svg{width:22px;height:22px}
   .dock .short{display:none}
@@ -74,6 +75,13 @@
   .notes .more{font-size:.84rem;color:var(--faint);text-align:center;margin-top:4px}
 
   section.page{padding:clamp(90px,11vw,150px) 0}
+  .skip{position:absolute;left:12px;top:-60px;z-index:10;padding:10px 16px;border-radius:12px;background:var(--text);color:#fff;font-weight:700;text-decoration:none}
+  .skip:focus{top:12px}
+  [translate="no"]{font-variant-ligatures:none}
+  /* touch screens: in-flow glass is CSS so it moves exactly with the content */
+  .touch-glass [data-glass]:not(.dock):not(.dock *){background:rgba(255,255,255,.6);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.65),0 10px 26px rgba(24,40,90,.12)}
+  .touch-glass [data-glass="tint"]:not(.dock):not(.dock *){background:rgba(37,94,240,.92);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 10px 24px rgba(37,94,240,.3)}
+  .touch-glass .plan.pop [data-glass]{background:rgba(255,255,255,.9)}
   h2{font-size:clamp(2rem,3.6vw,3.2rem);line-height:1.02;font-weight:800;letter-spacing:-.035em;text-wrap:balance;max-width:18ch}
   .sub{margin-top:14px;color:var(--muted);max-width:52ch;font-size:1.1rem}
 
@@ -173,6 +181,16 @@
     .cc{grid-template-columns:1fr 1fr}
     .plans{grid-template-columns:1fr 1fr}
   }
+  /* small phones: the whole hero promise and the Book button sit above the dock */
+  @media (max-width:640px) and (max-height:760px){
+    main .lock{padding-top:70px}
+    .clock .time{font-size:3.9rem}
+    .clock .day,.clock .sleep{font-size:.9rem}
+    .lockgrid{margin-top:16px}
+    h1{font-size:2.15rem}
+    .lede{margin:12px 0 18px;font-size:1rem}
+    .btn.more{display:none}
+  }
   @media (max-width:640px){
     .dock a{min-width:0;padding:8px 8px 7px;font-size:.68rem}
     .dock a.hide-s,.dock .sep{display:none}
@@ -222,7 +240,8 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
 </svg>
 
 <canvas id="gl" aria-hidden="true"></canvas>
-<a class="brandmark" data-glass href="#top">CIPHER</a>
+<a class="skip" href="#top">Skip to content</a>
+<a class="brandmark" data-glass href="#top" translate="no">CIPHER</a>
 
 <nav class="dock" data-glass aria-label="Main">
   <a href="#product"><svg class="i"><use href="#i-bolt"/></svg>Product</a>
@@ -249,7 +268,7 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
           <div class="ctas">
             <a class="btn" data-glass="tint" href="https://wa.me/639467019866?text=Hi%20CIPHER%2C%20I%27d%20like%20to%20book%20a%20free%20setup%20visit%20for%20my%20business." target="_blank" rel="noopener">Book a setup
               <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="btn" data-glass href="#product">See what it did tonight</a>
+            <a class="btn more" data-glass href="#product">See what it did tonight</a>
           </div>
           <p class="after">Free setup visit. You pay only if you go ahead.</p>
         </div>
@@ -612,11 +631,13 @@ void main(){
     const tex2d = document.createElement('canvas'), soft2d = document.createElement('canvas')
     let W = 0, H = 0, DPR = 1, P = 900, quality = 1
     const coarse = matchMedia('(pointer: coarse)').matches
-    const resize = () => {
-      DPR = Math.max(.75, Math.min(coarse ? 1.25 : 1.75, devicePixelRatio || 1) * quality)
-      W = innerWidth; H = innerHeight
+    const resize = force => {
+      const nDPR = Math.max(.75, Math.min(coarse ? 1.25 : 1.75, devicePixelRatio || 1) * quality)
+      const sameField = !force && W === innerWidth && nDPR === DPR && P >= innerHeight
+      DPR = nDPR; W = innerWidth; H = innerHeight
       canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR)
       gl.viewport(0, 0, canvas.width, canvas.height)
+      if (sameField) return               // mobile URL bar showing/hiding: no need to redraw the field
       P = Math.max(H, 900)
       tex2d.width = Math.round(W * DPR); tex2d.height = Math.round(P * 2 * DPR)
       const c = tex2d.getContext('2d'); c.setTransform(DPR, 0, 0, DPR, 0, 0)
@@ -633,10 +654,19 @@ void main(){
     let radii = new WeakMap()
     const KIND = { '': 0, tint: 1, panel: 2 }
     const boxData = new Float32Array(MAXB * 4), boxRK = new Float32Array(MAXB * 2)
+    const fixedCache = new WeakMap()
+    const isFixed = el => {
+      if (fixedCache.has(el)) return fixedCache.get(el)
+      let f = false
+      for (let a = el; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).position === 'fixed') { f = true; break }
+      fixedCache.set(el, f); return f
+    }
+    if (coarse) document.documentElement.classList.add('touch-glass')
     const readBoxes = () => {
       let n = 0
       for (const el of document.querySelectorAll('[data-glass]')) {
         if (n >= MAXB) break
+        if (coarse && !isFixed(el)) continue
         const b = el.getBoundingClientRect()
         if (b.bottom < -80 || b.top > H + 80 || b.width < 2 || el.offsetParent === null && getComputedStyle(el).position !== 'fixed') continue
         let r = radii.get(el)
@@ -654,14 +684,21 @@ void main(){
     const dconf = o.drops || { sizes: [] }
     const drops = dconf.sizes.map(d => ({ ...d, x: 0, y: 0, vx: 0, vy: 0, s: 0, vs: 0 }))
     const st = { px: -1, py: -1, pointerIn: false, W: 0, H: 0, t: 0, scrollY: 0, pointerType: 'mouse' }
-    addEventListener('pointermove', e => { st.px = e.clientX; st.py = e.clientY; st.pointerIn = true; st.pointerType = e.pointerType }, { passive: true })
+    addEventListener('pointermove', e => { if (e.pointerType === 'touch') return; st.px = e.clientX; st.py = e.clientY; st.pointerIn = true; st.pointerType = e.pointerType }, { passive: true })
     document.addEventListener('pointerleave', () => { st.pointerIn = false })
     addEventListener('blur', () => { st.pointerIn = false })
-    addEventListener('pointerdown', e => {
-      if (e.pointerType === 'mouse') return
+    let tap = null
+    addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') tap = { x: e.clientX, y: e.clientY, t: performance.now() } }, { passive: true })
+    addEventListener('pointercancel', () => { tap = null }, { passive: true })   // the browser took over: it's a scroll
+    addEventListener('pointerup', e => {
+      if (!tap || e.pointerType === 'mouse') return
+      const still = Math.hypot(e.clientX - tap.x, e.clientY - tap.y) < 10 && performance.now() - tap.t < 400
+      tap = null
+      if (!still) return
       st.px = e.clientX; st.py = e.clientY; st.pointerIn = true; st.pointerType = e.pointerType
       clearTimeout(st._t); st._t = setTimeout(() => { st.pointerIn = false }, 2600)
     }, { passive: true })
+    addEventListener('scroll', () => { tap = null }, { passive: true })
     let light = [innerWidth * .3, -100]
     const spring = (d, tx, ty, ts, dt) => {
       const w0 = 2 * Math.PI / d.T
@@ -701,7 +738,7 @@ void main(){
     const watch = raw => {
       if (raw > .1) return                                   // a tab switch or a hitch, not a slow GPU
       frames++; slowT = slowT * .95 + raw * .05
-      if (frames > 90 && slowT > 1 / 40 && quality > .65) { quality *= .8; frames = 0; resize() }
+      if (frames > 90 && slowT > 1 / 40 && quality > .65) { quality *= .8; frames = 0; resize(true) }
     }
     canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); lost = true; document.documentElement.classList.add('no-gl') })
     const frame = now => {
@@ -737,9 +774,9 @@ void main(){
       requestAnimationFrame(frame)
     }
     let rt
-    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 120) })
+    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => resize(false), 120) })
     ;(document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
-      resize(); placeDrops()
+      resize(true); placeDrops()
       requestAnimationFrame(t => { last = t; frame(t) })
     })
     return { look, state: st }
