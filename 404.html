@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#E8EDF5">
+<meta name="robots" content="noindex">
+<title>Page not found · CIPHER</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ground:#E8EDF5;--text:#0E1320;--muted:#4B5569;--brand:#2F6BFF;--brand-deep:#1F4FD1;--ease-out:cubic-bezier(0.23,1,0.32,1);color-scheme:light}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--ground);-webkit-tap-highlight-color:rgba(47,107,255,.12)}
+  body{font-family:'Schibsted Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;color:var(--text);min-height:100svh;display:grid;place-items:center;padding:24px}
+  body::before{content:"";position:fixed;inset:0;z-index:-1;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000' preserveAspectRatio='none'><path d='M0 160 C420 60 980 280 1600 120 L1600 330 C1000 450 460 250 0 380 Z' fill='%232F6BFF' fill-opacity='.10'/><path d='M0 680 C500 580 1060 800 1600 650 L1600 790 C1060 920 480 720 0 850 Z' fill='%238FB0FF' fill-opacity='.17'/></svg>") center/100% 100% no-repeat,var(--ground)}
+  ::selection{background:var(--brand);color:#fff}
+  :focus-visible{outline:2px solid var(--brand);outline-offset:4px;border-radius:999px}
+  main{width:min(440px,100%);text-align:center;padding:40px 28px 32px;border-radius:32px;background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 0 0 1px rgba(255,255,255,.6),0 24px 50px -24px rgba(24,40,90,.35);animation:in .5s var(--ease-out) both}
+  @keyframes in{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+  .word{font-weight:800;letter-spacing:.16em;font-size:.95rem}
+  .code{font-size:clamp(4.5rem,18vw,6.5rem);font-weight:800;letter-spacing:-.045em;line-height:1;margin-top:22px}
+  h1{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-top:10px}
+  p{color:var(--muted);margin-top:8px;line-height:1.5}
+  .ctas{display:grid;gap:10px;margin-top:26px}
+  a.btn{display:block;padding:15px 22px;border-radius:999px;font-weight:700;text-decoration:none;transition:transform .16s var(--ease-out),background-color .15s ease}
+  a.btn:active{transform:scale(.97)}
+  .primary{background:var(--brand);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 12px 24px -12px rgba(37,94,240,.6)}
+  .ghost{background:rgba(255,255,255,.75);color:var(--text);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(14,19,32,.08)}
+  @media (hover:hover) and (pointer:fine){.primary:hover{background:var(--brand-deep)}.ghost:hover{color:var(--brand-deep)}}
+  @media (prefers-reduced-motion:reduce){main{animation:none}}
+</style>
+</head>
+<body>
+  <main>
+    <div class="word" translate="no">CIPHER</div>
+    <div class="code" aria-hidden="true">404</div>
+    <h1>This page doesn't exist.</h1>
+    <p>The link may be old or mistyped. Your business is still being answered, though.</p>
+    <div class="ctas">
+      <a class="btn primary" href="/">Go to the homepage</a>
+      <a class="btn ghost" href="https://wa.me/639467019866?text=Hi%20CIPHER%2C%20I%27d%20like%20to%20book%20a%20free%20setup%20visit%20for%20my%20business." target="_blank" rel="noopener">Message us on WhatsApp</a>
+    </div>
+  </main>
+</body>
+</html>

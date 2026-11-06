@@ -10,6 +10,13 @@
 <meta property="og:title" content="CIPHER · Your business, still answering at 2:14 am">
 <meta property="og:description" content="The AI operating system for local businesses. Answers customers on WhatsApp 24/7, runs bookings, orders and invoices. Free setup visit.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://cipherint.netlify.app/">
+<meta property="og:image" content="https://cipherint.netlify.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CIPHER: a phone lock screen at 2:14 am showing work done overnight">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://cipherint.netlify.app/">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,9 +108,11 @@
   /* ---- story motion: each plays once when it comes into view; none of it exists without .js-anim ---- */
   /* clock: the minute rolls 3 -> 4 as the 2:14 notification lands */
   .time .dg{display:inline-block;height:.9em;overflow:hidden;vertical-align:top}
-  .time .dg>span{display:block;height:.9em;transform:translateY(-100%)}
-  .js-anim .time .dg>span{animation:tick .5s var(--ease-out) 2.35s both}
-  @keyframes tick{from{transform:translateY(0)}to{transform:translateY(-100%)}}
+  /* the outgoing "3" lives in a pseudo-element, so the page text is exactly "2:14" for readers, search and copy */
+  .time .roll{display:block;transform:translateY(-50%)}
+  .time .roll::before{content:"3";display:block;height:.9em}
+  .js-anim .time .roll{animation:tick .5s var(--ease-out) 2.35s both}
+  @keyframes tick{from{transform:translateY(0)}to{transform:translateY(-50%)}}
   /* chat: messages arrive in order, replies after a typing indicator */
   .chat{position:relative}
   .chat .in{transform-origin:0 100%}.chat .out{transform-origin:100% 100%}
@@ -305,7 +314,7 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
     <div class="wrap">
       <div class="clock" aria-label="Tuesday, 2:14 in the morning">
         <div class="day">Tuesday</div>
-        <div class="time">2:1<span class="dg" aria-hidden="true"><span>3</span><span>4</span></span></div>
+        <div class="time">2:1<span class="dg"><span class="roll">4</span></span></div>
         <p class="sleep">You're asleep. Your business isn't.</p>
       </div>
       <div class="lockgrid">
@@ -933,6 +942,7 @@ if (!window.LiquidGlass) document.documentElement.classList.add('no-gl')
           }
           t += 650
         })
+        setTimeout(function () { dots.remove() }, t + 400)   // stop the dot loop once the conversation is done
       },
       apps: function (g) {
         [].slice.call(g.children).forEach(function (d, i) { d.style.transitionDelay = (i * 32) + 'ms' })

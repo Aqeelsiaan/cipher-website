@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /partner/
+Disallow: /portal/
+Disallow: /api/
+
+Sitemap: https://cipherint.netlify.app/sitemap.xml
