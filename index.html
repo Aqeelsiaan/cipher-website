@@ -115,13 +115,13 @@
   .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
   @keyframes dot{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-3px)}}
   /* modules: icons land one after another, like a home screen loading */
-  .js-anim .apps>div{opacity:0;transform:scale(.82);transition:opacity .35s var(--ease-out),transform .5s cubic-bezier(.34,1.36,.64,1)}
+  .js-anim .apps>div{opacity:0;transform:scale(.82);transition:opacity .35s var(--ease-out),transform .5s var(--ease-out)}
   .js-anim .apps.in>div{opacity:1;transform:none}
   /* setup: steps tick off in order, then the switch flips on */
   .settings .n{transition:background-color .25s ease,color .2s ease,transform .3s var(--ease-out);position:relative}
   .settings .n.ok{background:var(--brand);color:transparent;transform:scale(1.06)}
   .settings .n.ok::after{content:"";position:absolute;left:50%;top:46%;width:11px;height:6px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:translate(-50%,-50%) rotate(-45deg)}
-  .toggle::after{right:auto;left:3px;transform:translateX(20px);transition:transform .35s cubic-bezier(.34,1.36,.64,1)}
+  .toggle::after{right:auto;left:3px;transform:translateX(20px);transition:transform .35s var(--ease-out)}
   .toggle{transition:background-color .3s ease}
   .js-anim .settings:not(.done) .toggle{background:#CBD3E0}
   .js-anim .settings:not(.done) .toggle::after{transform:none}
