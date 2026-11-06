@@ -98,6 +98,34 @@
   .js-anim .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-out),transform .7s var(--ease-out)}
   .js-anim .reveal.in{opacity:1;transform:none}
   .js-anim .reveal.d1{transition-delay:.07s}
+  /* ---- story motion: each plays once when it comes into view; none of it exists without .js-anim ---- */
+  /* clock: the minute rolls 3 -> 4 as the 2:14 notification lands */
+  .time .dg{display:inline-block;height:.9em;overflow:hidden;vertical-align:top}
+  .time .dg>span{display:block;height:.9em;transform:translateY(-100%)}
+  .js-anim .time .dg>span{animation:tick .5s var(--ease-out) 2.35s both}
+  @keyframes tick{from{transform:translateY(0)}to{transform:translateY(-100%)}}
+  /* chat: messages arrive in order, replies after a typing indicator */
+  .chat{position:relative}
+  .chat .in{transform-origin:0 100%}.chat .out{transform-origin:100% 100%}
+  .js-anim .chat p{opacity:0;transform:translateY(8px) scale(.96);transition:opacity .3s var(--ease-out),transform .4s var(--ease-out)}
+  .js-anim .chat p.on{opacity:1;transform:none}
+  .typing{position:absolute;right:0;display:flex;gap:4px;padding:11px 13px;border-radius:18px 18px 6px 18px;background:var(--brand);opacity:0;transform:scale(.9);transform-origin:100% 100%;transition:opacity .2s ease,transform .25s var(--ease-out)}
+  .typing.on{opacity:1;transform:none}
+  .typing i{width:6px;height:6px;border-radius:50%;background:#fff;opacity:.5;animation:dot 1s ease-in-out infinite}
+  .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+  @keyframes dot{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+  /* modules: icons land one after another, like a home screen loading */
+  .js-anim .apps>div{opacity:0;transform:scale(.82);transition:opacity .35s var(--ease-out),transform .5s cubic-bezier(.34,1.36,.64,1)}
+  .js-anim .apps.in>div{opacity:1;transform:none}
+  /* setup: steps tick off in order, then the switch flips on */
+  .settings .n{transition:background-color .25s ease,color .2s ease,transform .3s var(--ease-out);position:relative}
+  .settings .n.ok{background:var(--brand);color:transparent;transform:scale(1.06)}
+  .settings .n.ok::after{content:"";position:absolute;left:50%;top:46%;width:11px;height:6px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:translate(-50%,-50%) rotate(-45deg)}
+  .toggle::after{right:auto;left:3px;transform:translateX(20px);transition:transform .35s cubic-bezier(.34,1.36,.64,1)}
+  .toggle{transition:background-color .3s ease}
+  .js-anim .settings:not(.done) .toggle{background:#CBD3E0}
+  .js-anim .settings:not(.done) .toggle::after{transform:none}
+
 
   /* widgets: sizes carry meaning (the big one is the job that matters most) */
   .widgets{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(150px,auto);gap:16px;margin-top:44px}
@@ -277,7 +305,7 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
     <div class="wrap">
       <div class="clock" aria-label="Tuesday, 2:14 in the morning">
         <div class="day">Tuesday</div>
-        <div class="time">2:14</div>
+        <div class="time">2:1<span class="dg" aria-hidden="true"><span>3</span><span>4</span></span></div>
         <p class="sleep">You're asleep. Your business isn't.</p>
       </div>
       <div class="lockgrid">
@@ -309,7 +337,7 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
         <article class="w l" data-glass="panel">
           <h3>Answers every customer</h3>
           <p>Instantly, 24/7, in your prices and policies. When it doesn't know, it hands the chat to you.</p>
-          <div class="chat" aria-label="Example conversation">
+          <div class="chat" aria-label="Example conversation" data-anim="chat">
             <p class="in">Do you deliver? What are your hours?</p>
             <p class="out">Yes, within 5 km. We're open 8 am to 10 pm daily.</p>
             <p class="in">I need a birthday cake for Sunday</p>
@@ -326,12 +354,12 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
         </article>
         <article class="w" data-glass="panel">
           <h3>Finds new people</h3>
-          <div class="big-num">25–50</div>
+          <div class="big-num" data-anim="count" aria-label="25 to 50">25–50</div>
           <p>new people a day, from a separate number.</p>
         </article>
         <article class="w" data-glass="panel">
           <h3>Never drops one</h3>
-          <div class="big-num">24 h</div>
+          <div class="big-num" data-anim="count" aria-label="24 hours">24 h</div>
           <p>then an automatic, polite follow-up.</p>
         </article>
       </div>
@@ -344,7 +372,7 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
         <h2>Thirteen modules, already installed.</h2>
         <p class="sub">Each one runs a real part of your operations inside the chat your customer already started. You don't install or learn anything.</p>
       </div>
-      <div class="apps" data-glass="panel">
+      <div class="apps" data-glass="panel" data-anim="apps">
         <div><i><svg class="i"><use href="#i-cal"/></svg></i>Bookings</div>
         <div><i><svg class="i"><use href="#i-bag"/></svg></i>Orders</div>
         <div><i><svg class="i"><use href="#i-rec"/></svg></i>Fees &amp; invoices</div>
@@ -368,7 +396,7 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
         <h2>Set up in one visit.</h2>
         <p class="sub">We come to you and set it up in about 15 to 30 minutes. You won't configure anything.</p>
       </div>
-      <ol class="settings" data-glass="panel">
+      <ol class="settings" data-glass="panel" data-anim="steps">
         <li><span class="n">1</span><div><b>Business type</b><span>Schools, gyms, clinics, salons, restaurants, shops and more.</span></div><span class="chev" aria-hidden="true"></span></li>
         <li><span class="n">2</span><div><b>About eight questions</b><span>Prices, hours, services, location. You talk, we type.</span></div><span class="chev" aria-hidden="true"></span></li>
         <li><span class="n">3</span><div><b>AI writes the rest</b><span>Personality, 20+ answers, greetings and outreach messages.</span></div><span class="chev" aria-hidden="true"></span></li>
@@ -888,6 +916,50 @@ if (!window.LiquidGlass) document.documentElement.classList.add('no-gl')
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } })
     }, { rootMargin: '0px 0px -12% 0px' })
     els.forEach(function (el) { io.observe(el) })
+
+    // story pieces: each plays once, the first time it is mostly on screen
+    var play = {
+      chat: function (c) {
+        var ps = [].slice.call(c.querySelectorAll('p')), t = 0
+        var dots = document.createElement('span'); dots.className = 'typing'; dots.setAttribute('aria-hidden', 'true'); dots.innerHTML = '<i></i><i></i><i></i>'
+        c.appendChild(dots)
+        ps.forEach(function (p) {
+          if (p.classList.contains('out')) {
+            setTimeout(function () { dots.style.top = p.offsetTop + 'px'; dots.classList.add('on') }, t)
+            t += 900
+            setTimeout(function () { dots.classList.remove('on'); p.classList.add('on') }, t)
+          } else {
+            setTimeout(function () { p.classList.add('on') }, t)
+          }
+          t += 650
+        })
+      },
+      apps: function (g) {
+        [].slice.call(g.children).forEach(function (d, i) { d.style.transitionDelay = (i * 32) + 'ms' })
+        g.classList.add('in')
+      },
+      steps: function (o) {
+        var ns = o.querySelectorAll('.n')
+        ;[].forEach.call(ns, function (n, i) { setTimeout(function () { n.classList.add('ok') }, 200 + i * 380) })
+        setTimeout(function () { o.classList.add('done') }, 200 + ns.length * 380)
+      },
+      count: function (el) {
+        var final = el.dataset.final || el.textContent, nums = final.match(/\d+/g)
+        if (!nums) return
+        var t0 = performance.now(), dur = 900
+        ;(function step(now) {
+          var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3), i = 0
+          el.textContent = final.replace(/\d+/g, function () { return Math.round(+nums[i++] * e) })
+          if (k < 1) requestAnimationFrame(step); else el.textContent = final
+        })(t0)
+      }
+    }
+    var io2 = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { io2.unobserve(e.target); play[e.target.dataset.anim](e.target) } })
+    }, { rootMargin: '0px 0px -20% 0px', threshold: 0 })   // fires on any screen height, even when the block is taller than the viewport
+    // counters start from zero rather than flashing their final value first
+    document.querySelectorAll('[data-anim="count"]').forEach(function (el) { el.dataset.final = el.textContent; el.textContent = el.textContent.replace(/\d+/g, '0') })
+    document.querySelectorAll('[data-anim]').forEach(function (el) { io2.observe(el) })
   })()
 </script>
 </body>
