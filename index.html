@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#E8EDF5">
+<script id="anim-flag">if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('js-anim')</script>
 <title>CIPHER · The AI operating system for your business</title>
 <meta name="description" content="CIPHER answers your customers on WhatsApp day and night, runs bookings, orders and invoices, and finds new customers. Free setup visit; pay only if you go ahead.">
 <meta property="og:title" content="CIPHER · Your business, still answering at 2:14 am">
@@ -26,14 +27,19 @@
   ::selection{background:var(--brand);color:#fff}
   a{color:inherit;text-underline-offset:.22em}
   :focus-visible{outline:2px solid var(--brand);outline-offset:4px;border-radius:14px}
-  #gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+  #gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;opacity:0;transition:opacity .45s var(--ease-out)}
+  html.gl-ready #gl{opacity:1}
+  /* until the glass engine draws its first frame, every glass surface is plain frosted CSS (never invisible) */
+  [data-glass]{transition:background-color .45s var(--ease-out),box-shadow .45s var(--ease-out)}
+  html:not(.gl-ready):not(.no-gl) [data-glass]:not(.dock){background:rgba(255,255,255,.62);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6),0 10px 26px rgba(24,40,90,.12)}
+  html:not(.gl-ready):not(.no-gl) [data-glass="tint"]:not(.dock){background:rgba(37,94,240,.92)}
   main,footer{position:relative;z-index:1}
   .wrap{width:min(1180px,100% - 2*clamp(20px,5vw,64px));margin-inline:auto}
   svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
   /* the dock is the navigation */
   .dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:5;backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);background:rgba(240,244,250,.62);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55);display:flex;align-items:center;gap:4px;padding:8px;border-radius:30px}
-  .dock a{display:grid;justify-items:center;gap:3px;min-width:70px;padding:8px 10px 7px;border-radius:22px;text-decoration:none;font-size:.74rem;font-weight:600;color:var(--text);transition:transform .16s var(--ease-out)}
+  .dock a{display:grid;justify-items:center;gap:3px;min-width:70px;padding:8px 10px 7px;border-radius:22px;text-decoration:none;font-size:.74rem;font-weight:600;color:var(--text);transition:transform .16s var(--ease-out),background-color .45s var(--ease-out),box-shadow .45s var(--ease-out)}
   .dock a svg{width:22px;height:22px}
   .dock .short{display:none}
   .dock a.book{white-space:nowrap;color:#fff;min-width:96px;background:rgba(37,94,240,.72)}
@@ -57,7 +63,7 @@
   .btn[data-glass="tint"]{color:#fff}
   .btn:active{transform:scale(.97)}
   @media (hover:hover) and (pointer:fine){
-    .btn{transition:transform .22s var(--ease-out)}
+    .btn{transition:transform .22s var(--ease-out),background-color .45s var(--ease-out),box-shadow .45s var(--ease-out)}
     .btn:hover{transform:translateY(-2px)}
     .btn:hover:active{transform:translateY(-1px) scale(.97)}
     .dock a{transition:transform .22s var(--ease-out),background-color .2s ease}
@@ -66,6 +72,11 @@
   .btn svg{width:18px;height:18px}
 
   .notes{display:grid;gap:10px}
+  @keyframes note-in{from{opacity:0;transform:translateY(-18px) scale(.94)}to{opacity:1;transform:none}}
+  .js-anim .note{animation:note-in .6s var(--ease-out) both}
+  .js-anim .notes .note:nth-child(3){animation-delay:.7s}
+  .js-anim .notes .note:nth-child(2){animation-delay:1.25s}
+  .js-anim .notes .note:nth-child(1){animation-delay:1.8s}
   .note{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:start;padding:14px 16px;border-radius:22px}
   .note .app{width:38px;height:38px;border-radius:11px;background:var(--text);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.8rem;letter-spacing:.04em}
   .note .app.amber{background:#B7791F}
@@ -84,6 +95,9 @@
   .touch-glass .plan.pop [data-glass]{background:rgba(255,255,255,.9)}
   h2{font-size:clamp(2rem,3.6vw,3.2rem);line-height:1.02;font-weight:800;letter-spacing:-.035em;text-wrap:balance;max-width:18ch}
   .sub{margin-top:14px;color:var(--muted);max-width:52ch;font-size:1.1rem}
+  .js-anim .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-out),transform .7s var(--ease-out)}
+  .js-anim .reveal.in{opacity:1;transform:none}
+  .js-anim .reveal.d1{transition-delay:.07s}
 
   /* widgets: sizes carry meaning (the big one is the job that matters most) */
   .widgets{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(150px,auto);gap:16px;margin-top:44px}
@@ -159,6 +173,11 @@
   summary::after{content:"";position:absolute;right:4px;top:50%;width:8px;height:8px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:translateY(-70%) rotate(45deg);transition:transform .2s var(--ease-out)}
   details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
   details p{padding:0 0 18px;color:var(--muted);max-width:62ch}
+  @supports selector(::details-content){
+    :root{interpolate-size:allow-keywords}
+    details::details-content{block-size:0;overflow:clip;transition:block-size .28s var(--ease-out),content-visibility .28s allow-discrete}
+    details[open]::details-content{block-size:auto}
+  }
 
   .close{padding:clamp(100px,12vw,170px) 0 170px;text-align:center}
   .close h2{margin-inline:auto;font-size:clamp(2.4rem,5.4vw,4.6rem);max-width:15ch}
@@ -273,9 +292,9 @@ FORM: Full page, variant 2 of 4 (Home Screen). Seed e38d9aa6.
           <p class="after">Free setup visit. You pay only if you go ahead.</p>
         </div>
         <div class="notes" aria-label="Example notifications, illustrative">
-          <div class="note" data-glass="panel"><span class="app">C</span><div><b>Order taken</b><span>2 lb chocolate cake for Sunday. Address saved.</span></div><time>2:14 am</time></div>
-          <div class="note" data-glass="panel"><span class="app">C</span><div><b>Appointment booked</b><span>Haircut + blow dry, Saturday 5:00 pm.</span></div><time>1:52 am</time></div>
-          <div class="note" data-glass="panel"><span class="app amber">C</span><div><b>Waiting for you</b><span>A parent asked about braces for a 9-year-old. Ready to hand over.</span></div><time>12:40 am</time></div>
+          <div class="note" data-glass="panel" data-glass-fade><span class="app">C</span><div><b>Order taken</b><span>2 lb chocolate cake for Sunday. Address saved.</span></div><time>2:14 am</time></div>
+          <div class="note" data-glass="panel" data-glass-fade><span class="app">C</span><div><b>Appointment booked</b><span>Haircut + blow dry, Saturday 5:00 pm.</span></div><time>1:52 am</time></div>
+          <div class="note" data-glass="panel" data-glass-fade><span class="app amber">C</span><div><b>Waiting for you</b><span>A parent asked about braces for a 9-year-old. Ready to hand over.</span></div><time>12:40 am</time></div>
           <p class="more">Examples are illustrative.</p>
         </div>
       </div>
@@ -667,6 +686,7 @@ void main(){
       for (const el of document.querySelectorAll('[data-glass]')) {
         if (n >= MAXB) break
         if (coarse && !isFixed(el)) continue
+        if (el.hasAttribute('data-glass-fade') && +getComputedStyle(el).opacity < .35) continue
         const b = el.getBoundingClientRect()
         if (b.bottom < -80 || b.top > H + 80 || b.width < 2 || el.offsetParent === null && getComputedStyle(el).position !== 'fixed') continue
         let r = radii.get(el)
@@ -719,6 +739,16 @@ void main(){
         else if (tg.chain) { tx = drops[i - 1].x; ty = drops[i - 1].y }
         else { const a = st.t * .5 + i * 1.9; tx = tg.x + Math.cos(a) * (tg.spread ?? 34); ty = tg.y + Math.sin(st.t * .6 + i * 1.3) * (tg.spread ?? 34) * .75 }
         spring(d, tx, ty, tg.size ?? 1, dt)
+        // a droplet may stretch away from the one ahead of it, never break off: past touching distance it is held at the surface
+        if (i > 0) {
+          const a = drops[i - 1], sr = dconf.scale ? dconf.scale(W, H) : 1
+          const dx = d.x - a.x, dy = d.y - a.y, dist = Math.hypot(dx, dy)
+          const reach = (a.r * a.s + d.r * d.s) * sr * .82
+          if (dist > reach && dist > 0) {
+            d.x = a.x + dx / dist * reach; d.y = a.y + dy / dist * reach
+            d.vx = d.vx * .6 + a.vx * .4; d.vy = d.vy * .6 + a.vy * .4
+          }
+        }
       })
     }
     const placeDrops = () => {
@@ -732,7 +762,7 @@ void main(){
 
     /* loop */
     const dropData = new Float32Array(20), ang = new Float32Array(5)
-    let off = 0, last = performance.now(), lost = false
+    let off = 0, last = performance.now(), lost = false, ready = false
     // adaptive quality: if the device can't hold ~40fps, render fewer pixels (twice at most)
     let slowT = 0, frames = 0
     const watch = raw => {
@@ -771,6 +801,7 @@ void main(){
       if (o.onFrame) o.onFrame(st, look)
       setLook()
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+      if (!ready) { ready = true; requestAnimationFrame(() => document.documentElement.classList.add('gl-ready')) }
       requestAnimationFrame(frame)
     }
     let rt
@@ -841,6 +872,23 @@ if (!window.LiquidGlass) document.documentElement.classList.add('no-gl')
     }
   })
 })()
+</script>
+<script>
+  // one-time entrance motion; people who ask for reduced motion get the final state straight away
+  (function () {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return
+    // js-anim is set in <head> so nothing paints in its final state first
+    var els = []
+    document.querySelectorAll('section.page').forEach(function (sec) {
+      var h = sec.querySelector('h2'), sub = sec.querySelector('.sub')
+      if (h) { h.classList.add('reveal'); els.push(h) }
+      if (sub) { sub.classList.add('reveal', 'd1'); els.push(sub) }
+    })
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } })
+    }, { rootMargin: '0px 0px -12% 0px' })
+    els.forEach(function (el) { io.observe(el) })
+  })()
 </script>
 </body>
 </html>
